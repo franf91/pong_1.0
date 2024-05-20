@@ -1,19 +1,33 @@
 html{
     background-color: black;
+   
+}
+
+body{
+  margin:0;
 }
 
 #game_container{
-    width:500px;
-    height:500px;
+    width:650px;
+    height:480px;
     border:1px solid gray;
     margin:0 auto;
     display:grid;
     grid-template-columns: 1fr 1fr ;
 }
 
-.game_ball{
-  width:8px;
-  height:8px;
+#game_player1{
+  position:relative;
+  top:200px;
+}
+#game_player2{
+  position:relative;
+  top:200px;
+}
+
+#game_ball{
+  width:16px;
+  height:16px;
   background-color: white;
   position:relative;
   margin:0 auto;
@@ -37,11 +51,10 @@ html{
 }
 
 .game_player{
-  width:8px;
-  height:48px;
+  width:16px;
+  height:80px;
   background-color: white;
-  position:relative;
-  top:200px;
+ 
   
 }
 
