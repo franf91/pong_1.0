@@ -101,7 +101,7 @@ gameMenuOption.addEventListener("click",()=>{
 
         playerScore2 = 0;
 
-        //requestAnimationFrame(BallMovement);
+        requestAnimationFrame(BallMovement);
 
 })
 
@@ -222,3 +222,184 @@ window.addEventListener("keydown", (event)=>{
 window.addEventListener("keyup", (event)=>{
     keys[event.key] = false;
 })
+
+// BALL LOGIC
+
+function BallMoveRight(){
+
+    let ballPositionLeft = ball.getBoundingClientRect().left;
+
+    let ballPositionTop = ball.getBoundingClientRect().top;
+
+    let ballCenterX = GameElementCenterX(ball);
+
+    let ballCenterY = GameElementCenterY(ball);
+
+    let player2CenterX = GameElementCenterX(player2);
+
+    let player2CenterY = GameElementCenterY(player2);
+
+
+    if(ballMovementRight){
+        
+        moveBallX += distance;
+
+        moveBallY += ballMovementUp*distance2;
+       
+        ball.style.transform = `translate(${moveBallX}px,${moveBallY}px)`; 
+    } 
+
+    
+   
+
+
+    
+    if(Math.abs(ballCenterX - player2CenterX) < player1Width && Math.abs(ballCenterY - player2CenterY) <= 32){
+        ballMovementRight = false;
+
+        if(ballCenterY - player2CenterY >= 0){
+            ballMovementUp = 1;
+        }else if (ballCenterY - player2CenterY < 0){
+            ballMovementUp = -1;
+        }
+
+        
+    }
+    
+    
+    
+    
+    if(ballPositionLeft >= rightGameLimit){
+        moveBallX = 0;
+        moveBallY = 0;
+        ball.style.top = "50%";
+        ball.style.left = "304px";
+        ball.style.transform = `translate(${moveBallX}px,${moveBallY}px)`; 
+        ballMovementRight = false;  
+
+        playerScore1++;
+
+        score1.textContent=`${playerScore1}`;
+
+        if( playerScore1 === gameWinner){
+            gameMenu.style.display = "flex";
+            cancelAnimationFrame(BallMovement);
+        }
+        
+
+        
+    }
+    
+
+    if(ballPositionTop <= (topGameLimit) || ballPositionTop >= bottomGameLimitBall){
+        ballMovementUp = -ballMovementUp;
+
+        moveBallY += ballMovementUp*(2*distance2);
+       
+        ball.style.transform = `translate(${moveBallX}px,${moveBallY}px)`; 
+    }
+
+    
+       
+
+}
+
+
+function BallMoveLeft(){
+
+    let ballPositionLeft = ball.getBoundingClientRect().left;
+
+    let ballPositionTop = ball.getBoundingClientRect().top;
+
+    let ballCenterX = GameElementCenterX(ball);
+
+    let ballCenterY = GameElementCenterY(ball);
+
+    let player1CenterX = GameElementCenterX(player1);
+
+    let player1CenterY = GameElementCenterY(player1);
+
+
+
+    if(!ballMovementRight){
+        
+        moveBallX -= distance;
+        
+        moveBallY += ballMovementUp*distance2;
+       
+        ball.style.transform = `translate(${moveBallX}px,${moveBallY}px)`; 
+    } 
+
+
+    
+
+   
+    
+
+    if(Math.abs(ballCenterX - player1CenterX) < player1Width  && Math.abs(ballCenterY - player1CenterY) <= 32){
+        ballMovementRight = true;
+
+        if(ballCenterY - player1CenterY >= 0){
+            ballMovementUp = 1;
+        }else if (ballCenterY - player1CenterY < 0){
+            ballMovementUp = -1;
+        }
+
+        
+    }
+    
+   
+    
+    if (ballPositionLeft <= leftGameLimit){
+        moveBallX = 0;
+        moveBallY = 0;
+
+        ballMovementRight = true;
+
+        ball.style.top = "50%";
+        ball.style.left = "50%";
+
+        ball.style.transform = `translate(${moveBallX}px,${moveBallY}px)`; 
+
+        playerScore2++;
+
+        score2.textContent=`${playerScore2}`;
+
+        if( playerScore2 === gameWinner){
+            gameMenu.style.display = "flex";
+            cancelAnimationFrame(BallMovement);
+        }
+   
+    }
+   
+
+    if(ballPositionTop <= topGameLimit || ballPositionTop >= bottomGameLimitBall){
+        ballMovementUp = -ballMovementUp;
+        moveBallY += ballMovementUp*(2*distance2);
+        ball.style.transform = `translate(${moveBallX}px,${moveBallY}px)`; 
+    }
+
+
+
+
+}
+
+
+function BallMovement(){
+    
+  
+
+    BallMoveRight();
+
+    BallMoveLeft();
+
+    if (playerScore1 === gameWinner ||playerScore2  === gameWinner  ) {
+        
+        cancelAnimationFrame(animationId); 
+        return;
+    }
+
+    
+
+    animationId = requestAnimationFrame(BallMovement);
+}
