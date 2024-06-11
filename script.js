@@ -105,3 +105,120 @@ gameMenuOption.addEventListener("click",()=>{
 
 })
 
+// GAME LOGIC
+
+function GameElementCenterX (gameElement){
+    let gameElementStats = gameElement.getBoundingClientRect();
+  
+    return gameElementStats.x + gameElementStats.width/2;
+  }
+  
+  function GameElementCenterY (gameElement){
+      let gameElementStats = gameElement.getBoundingClientRect();
+    
+      return gameElementStats.y + gameElementStats.height/2;
+    }
+
+
+window.addEventListener("load",()=>{
+    ball.style.top = "50%";
+    ball.style.left = "50%";
+
+    console.log(ball.getBoundingClientRect().left);
+})
+
+
+// PLAYER LOGIC
+
+function Player1MovementUp(){
+    
+    let Player1TopPosition = player1.getBoundingClientRect().top ;
+
+    if(Player1TopPosition > topGameLimit ){
+        move1 -= distance;
+        player1.style.transform = `translateY(${move1}px)`;
+       
+        
+    }
+    
+}
+
+function Player1MovementDown(){
+    
+    let Player1TopPosition = player1.getBoundingClientRect().top ;
+
+
+    if(Player1TopPosition < bottomGameLimit){
+        move1 += distance;
+        player1.style.transform = `translateY(${move1}px)`;
+    }
+ 
+}
+
+function Player2MovementUp(){
+    
+    
+    let Player2TopPosition = player2.getBoundingClientRect().top;
+
+
+    if(Player2TopPosition > topGameLimit){
+        move2 -= distance;
+        player2.style.transform = `translateY(${move2}px)`;
+        
+    }
+}
+
+
+
+function Player2MovementDown(){
+    
+
+    let Player2TopPosition = player2.getBoundingClientRect().top;
+
+
+    if(Player2TopPosition < bottomGameLimit){
+        move2 += distance;
+        player2.style.transform = `translateY(${move2}px)`;
+        
+    }
+}
+
+
+function PlayerMovement(){
+
+    if(keys["w"] || keys["W"]){
+       
+        Player1MovementUp();
+    }
+
+    if(keys["s"] || keys["S"]){
+        Player1MovementDown();
+    }
+
+    if(keys["ArrowUp"]){
+        Player2MovementUp();
+    }
+
+    if(keys["ArrowDown"]){
+        Player2MovementDown();
+    }
+
+    requestAnimationFrame(PlayerMovement);
+}
+
+
+
+
+requestAnimationFrame(PlayerMovement);
+
+
+window.addEventListener("keydown", (event)=>{
+    keys[event.key] = true;
+    
+   
+})
+
+
+window.addEventListener("keyup", (event)=>{
+    keys[event.key] = false;
+})
