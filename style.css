@@ -1,64 +1,91 @@
-html{
-    background-color: black;
-   
-}
 
-body{
-  margin:0;
-}
+.gameMenu{
+  
+  height:480px;
+  width:640px;
+  color:white;
+  background-color: black;
+  margin: 0 auto;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  
+  flex-direction: column;
 
-#game_container{
-    width:650px;
-    height:480px;
-    border:1px solid gray;
-    margin:0 auto;
-    display:grid;
-    grid-template-columns: 1fr 1fr ;
 }
-
-#game_player1{
-  position:relative;
-  top:200px;
-}
-#game_player2{
-  position:relative;
-  top:200px;
-}
-
-#game_ball{
-  width:16px;
-  height:16px;
-  background-color: white;
-  position:relative;
-  margin:0 auto;
-  left:100px;
-  top:100px;
-}
-.game_cell1{
- border-right:3px dashed gray;
- display:flex;
- justify-content:space-between;
- padding:0 16px 0 16px;
- 
-}
-
-.game_cell2{
-    border-left:3px dashed gray;
-    display:flex;
-    justify-content:space-between;
-    padding:0 16px 0 16px;
-   
-}
-
-.game_player{
-  width:16px;
-  height:80px;
-  background-color: white;
- 
+.option{
+  border:2px solid lightgray;
+  border-radius: 6px;
+  padding:12px;
+  font-size: 24px;
+  margin-bottom:24px;
+  width:fit-content;
+  cursor: pointer;
   
 }
-
-.game_score{
-    color:white;
-    font-size: 48px;
+.option:hover{
+  background-color: lightgray;
+  color:black;
 }
+.container{
+    height:480px;
+    width:640px;
+  
+    display:grid;
+    
+    visibility: hidden;
+
+    grid-template-columns: 1fr 1fr;
+
+    margin:0 auto;
+
+    position:relative;
+
+    background-color: black;
+  
+    }
+    
+.ball{
+   width:16px;
+   height:16px;
+   background-color:white;
+   
+   position:absolute;
+  
+   
+  }
+
+  .cell1{
+    border-right: 3px dashed white;
+    position:relative;
+  }
+
+  .cell2{
+    border-left: 3px dashed white;
+    position:relative;
+  }
+  .score1,.score2{
+    font-size:48px;
+    position:absolute;
+    color:white
+  }
+  .score1{
+    right:16px;
+  }
+  .score2{
+    left:16px;
+  }
+  .player1,.player2{
+    width:16px;
+    height:80px;
+    background-color:white;
+    position:absolute;
+    top:192px;
+    
+  }
+  .player1{
+    left:16px;
+  }
+  .player2{
+    right:16px;
+  }

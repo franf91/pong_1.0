@@ -1,119 +1,107 @@
-const player1 = document.getElementById("game_player1");
+let keys = {};  
 
-const player2 = document.getElementById("game_player2");
+const gameWinner = 11
 
-const gameBall = document.getElementById("game_ball");
+let animationId;
 
-const gameContainer = document.getElementById("game_container");
+const body = document.getElementById("body");
 
-const gameContainerBorderWidth = 1
+const gameMenu = document.getElementById("gameMenu");
 
-const distanceChange = 50;
+const gameMenuOption = document.getElementById("option");
 
-const playerHeight = player1.getBoundingClientRect().height;
+let bodyMarginTop = parseFloat(getComputedStyle(body).marginTop,10);
 
-const gameContainerHeight = gameContainer.getBoundingClientRect().height - 2*(gameContainerBorderWidth);
+const gameContainer = document.getElementById("container");
 
-const bottomGameConstraint =  gameContainerHeight - playerHeight + distanceChange;
+let gameContainerHeight = gameContainer.getBoundingClientRect().height;
+
+let gameContainerWidth = gameContainer.getBoundingClientRect().width;
+
+let gameContainerMargin = parseFloat(getComputedStyle(gameContainer).marginLeft,10)
+
+const player1 = document.getElementById("player1");
+
+let player1Height = player1.getBoundingClientRect().height;
+
+let player1Width = player1.getBoundingClientRect().width;
+
+const player2 = document.getElementById("player2");
+
+const ball = document.getElementById("ball");
+
+const ballHeight = ball.getBoundingClientRect().height;
+
+const distance = 4;
+
+const distance2 = 4;
+
+let move1 = 0;
+
+let move2 = 0;
+
+let moveBallX = 0;
+
+let moveBallY = 0;
+
+const bottomGameLimit = (bodyMarginTop + gameContainerHeight) - player1Height ;
+
+const bottomGameLimitBall = (bodyMarginTop + gameContainerHeight) - ballHeight;
+
+const topGameLimit = bodyMarginTop;
+
+const leftGameLimit = gameContainerMargin + distance;
+
+const rightGameLimit = gameContainerMargin + gameContainerWidth - 2*distance ;
+
+let ballMovementRight = true;
+
+let ballMovementUp = 0;
+
+const score1 = document.getElementById("score1");
+
+const score2 = document.getElementById("score2");
+
+let playerScore1 = 0;
+
+let playerScore2 = 0;
 
 
 
 
+gameMenuOption.addEventListener("click",()=>{
+    gameMenu.style.display = "none";
 
-const playerMoveUp = ()=>{
-    console.log("move up");
-}
+    gameContainer.style.visibility = "visible";
 
-function playerMove(){
     
-}
+        player1.style.top = "192px";
+        player1.style.left = "16px";
+        player1.style.transform = `translateY(0px)`
 
-player1.addEventListener("keypress",(event)=>{
-    player1.focus();
-    if(event.key == "w" || event.key == "W"  ){
-
+        player2.style.top = "192px";
+        player2.style.right = "16px";
+        player2.style.transform = `translateY(0px)`
        
+        moveBallX = 0;
+        moveBallY = 0;
+        ballMovementUp = 0
 
-        gameBallHeight = gameBall.getBoundingClientRect().height
-        
-        console.log("before moving up: "+ player1.getBoundingClientRect().top);
+        ballMovementRight = true;
 
-        let cp = player1.getBoundingClientRect().top - gameBallHeight - gameContainerBorderWidth  - distanceChange;
+        ball.style.top = "50%";
+        ball.style.left = "50%";
 
-        console.log("moving up: "+ cp);
+        ball.style.transform = `translate(${moveBallX}px,${moveBallY}px)`; 
 
-        if(cp > - distanceChange){
-            player1.style.top = cp + "px";
-        }
+        score1.textContent=`0`
+        score2.textContent=`0`
 
+        playerScore1 = 0;
 
+        playerScore2 = 0;
 
-        console.log("Player1 current top value: " + player1.style.top);
+        //requestAnimationFrame(BallMovement);
 
-        console.log(gameContainerHeight);
-        
-
-    
-    }else if(event.key == "s" || event.key == "S"){
-
-        gameBallHeight = gameBall.getBoundingClientRect().height
-        
-        console.log("before moving down: "+ player1.getBoundingClientRect().top);
-
-        let cp = player1.getBoundingClientRect().top - gameBallHeight - gameContainerBorderWidth  + distanceChange;
-
-        console.log("moving down: "+ cp);
-
-        if(cp < bottomGameConstraint){
-            player1.style.top = cp + "px";
-        }
-       
-
-        console.log("Player1 current top value: " + player1.style.top);
-        
-        console.log(bottomGameConstraint);
-       
-    }
-});
-
-player2.addEventListener("keydown",(event)=>{
-    player2.focus();
-    
-    if(event.key == "ArrowUp"  ){
-        gameBallHeight = gameBall.getBoundingClientRect().height
-        
-        console.log("before moving up: "+ player2.getBoundingClientRect().top);
-
-        let cp = player2.getBoundingClientRect().top - gameBallHeight - gameContainerBorderWidth  - distanceChange;
-
-        console.log("moving up: "+ cp);
-
-        if(cp > - distanceChange){
-            player2.style.top = cp + "px";
-        }
-
-        console.log("Player2 current top value: " + player2.style.top);
-
-        console.log(gameContainerHeight);
-        
-    }else if(event.key == "ArrowDown" ){
-
-        gameBallHeight = gameBall.getBoundingClientRect().height
-        
-        console.log("before moving down: "+ player2.getBoundingClientRect().top);
-
-        let cp = player2.getBoundingClientRect().top - gameBallHeight - gameContainerBorderWidth  + distanceChange;
-
-        console.log("moving down: "+ cp);
-
-        if(cp < bottomGameConstraint){
-            player2.style.top = cp + "px";
-        }
-       
-
-        console.log("Player2 current top value: " + player2.style.top);
-        
-        console.log(bottomGameConstraint);
-    }
-});
+})
 

@@ -3,21 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Pong_1.0</title>
 </head>
-<body>
-    <div id="game_ball"></div>
-    <div id="game_container">
-        <div class = "game_cell1">
-            <div id = "game_player1" class="game_player" tabindex="0"></div>
-            <div class="game_score">0</div>
-        </div>
-        <div class = "game_cell2">
-            <div class="game_score">0</div>
-            <div id = "game_player2" class="game_player" tabindex="1" ></div>
-        </div>
+<body id = "body">
+
+<div id="gameMenu" class="gameMenu">
+    <h1>PONG</h1>
+    <div id="option" class="option">
+        START GAME
     </div>
+    <div>
+        PLAYER 1 - W AND S
+    </div>
+    <div>
+        PLAYER 2 - ARROW KEYS
+    </div>
+</div>
+
+
+    <div id = "container" class = "container">
+        <div  id = "ball" class = "ball"></div>
+        <div class = "cell1">
+            <div id ="score1" class = "score1">0</div>
+            <div id = "player1" class = "player1"></div>
+        </div>
+        <div class = "cell2">
+            <div id ="score2" class = "score2" >0</div>
+            <div id = "player2" class = "player2"></div>
+        </div>
+        </div>
+       </div>
+       
 </body>
 <script src="script.js"></script>
 </html>
