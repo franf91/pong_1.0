@@ -283,6 +283,7 @@ function BallMoveRight(){
 
         if( playerScore1 === gameWinner){
             gameMenu.style.display = "flex";
+            gameContainer.style.visibility = "hidden";
             cancelAnimationFrame(BallMovement);
         }
         
@@ -367,6 +368,7 @@ function BallMoveLeft(){
 
         if( playerScore2 === gameWinner){
             gameMenu.style.display = "flex";
+            gameContainer.style.visibility = "hidden";
             cancelAnimationFrame(BallMovement);
         }
    
